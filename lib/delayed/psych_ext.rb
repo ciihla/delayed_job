@@ -33,7 +33,7 @@ module Delayed
         case object.tag
         when /^!ruby\/object/
           result = super
-          if defined?(ActiveRecord::Base) && result.is_a?(ActiveRecord::Base)
+          if defined?(ActiveRecord::Base) && result.is_a?(ActiveRecord::Base) && Delayed::Worker.use_active_record_lookup
             begin
               result.class.find(result[result.class.primary_key])
             rescue ActiveRecord::RecordNotFound => error # rubocop:disable BlockNesting

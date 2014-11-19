@@ -16,11 +16,12 @@ module Delayed
     DEFAULT_DELAY_JOBS       = true
     DEFAULT_QUEUES           = []
     DEFAULT_READ_AHEAD       = 5
+    DEFAULT_USE_AR_LOOKUP    = true
 
     cattr_accessor :min_priority, :max_priority, :max_attempts, :max_run_time,
                    :default_priority, :sleep_delay, :logger, :delay_jobs, :queues,
                    :read_ahead, :plugins, :destroy_failed_jobs, :exit_on_complete,
-                   :default_log_level
+                   :default_log_level, :use_active_record_lookup
 
     # Named queue into which jobs are enqueued by default
     cattr_accessor :default_queue_name
@@ -39,6 +40,7 @@ module Delayed
       self.delay_jobs        = DEFAULT_DELAY_JOBS
       self.queues            = DEFAULT_QUEUES
       self.read_ahead        = DEFAULT_READ_AHEAD
+      self.use_active_record_lookup        = DEFAULT_USE_AR_LOOKUP
     end
 
     reset
